@@ -24,9 +24,6 @@ jobs:
           - userName: q215613905
             repoName: TVBoxOS
             branchName: main
-      - name: Generate local.properties
-        run: |
-      echo "# auto ci config" > TVBoxOSC/local.properties
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -100,6 +97,10 @@ jobs:
           java-version: ${{ matrix.java_ver }}
       - uses: gradle/actions/setup-gradle@v4
         if: ${{ env.commit }}
+      - name: Generate local.properties
+        if: ${{ env.commit }}
+        working-directory: TVBoxOSC
+        run: echo "# auto ci config" > local.properties
       - name: Build With Gradle
         if: ${{ env.commit }}
         working-directory: TVBoxOSC
