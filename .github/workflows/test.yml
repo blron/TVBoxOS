@@ -114,6 +114,13 @@ jobs:
         working-directory: TVBoxOSC
         run: |
           sed -i 's|D:/Programs/Python/Python38/python.exe|/usr/bin/python3|g' pyramid/build.gradle
+
+      # 新增：删除pyramid模块，跳过Python编译报错
+      - name: Disable pyramid module skip python build
+        if: ${{ env.commit }}
+        working-directory: TVBoxOSC
+        run: sed -i '/:pyramid/d' settings.gradle
+
       - name: Build With Gradle
         if: ${{ env.commit }}
         working-directory: TVBoxOSC
