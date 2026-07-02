@@ -101,6 +101,14 @@ jobs:
         if: ${{ env.commit }}
         working-directory: TVBoxOSC
         run: echo "# auto ci config" > local.properties
+      # 新增：Ubuntu安装Python3，并写入local.properties指定Python路径
+      - name: Install Python3 for Chaquopy
+        if: ${{ env.commit }}
+        working-directory: TVBoxOSC
+        run: |
+          sudo apt update
+          sudo apt install -y python3 python3-pip
+          echo "buildPython=/usr/bin/python3" >> local.properties
       - name: Build With Gradle
         if: ${{ env.commit }}
         working-directory: TVBoxOSC
