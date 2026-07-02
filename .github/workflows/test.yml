@@ -24,6 +24,8 @@ jobs:
           - userName: q215613905
             repoName: TVBoxOS
             branchName: main
+  - name: 生成 local.properties
+  run: echo "# auto generate for ci" > TVBoxOS/TVBoxOSC/local.properties
     steps:
       - name: Checkout
         uses: actions/checkout@v4
